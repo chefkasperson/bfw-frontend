@@ -14,7 +14,7 @@ class API {
     return fetch(this.baseURL + url, {
       method: 'POST',
       headers: this.headers,
-      ...this.options,
+      options: this.options,
       body: JSON.stringify(body)
     }).then(resp => resp.json())
   }
@@ -23,7 +23,7 @@ class API {
     return fetch(this.baseURL + url, {
       method: "GET",
       headers: this.headers,
-      ...this.options
+      options: this.options
     }).then(resp => resp.json())
   }
 }
