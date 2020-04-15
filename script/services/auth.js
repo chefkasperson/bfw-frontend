@@ -11,16 +11,27 @@ class Auth {
       .then(resp => {
         if (Response.logged_in) {
           this.setCurrentUser(resp.current_user)
-          Navbar.resetNav() 
+          DOM.resetNav()
+          DOM.loadMainContainer()
         } else {
-          Error.handleError(resp.message)
+          alert(resp.message)
         }
       })
   }
 
   static handleLogin() {
-    const username = document.querySelector('#login-form-username-input')
-    const password = document.querySelector('#login-form-password-input')
+    const username = document.querySelector('#login-form-username-input').value
+    const password = document.querySelector('#login-form-password-input').value
+    this.loginOrSignup('/login', username, password)
+  }
+
+  static handleSignup() {
+    const username = document.querySelector('#signup-form-username-input').value
+    const password = document.querySelector('#signup-form-password-input').value
+    this.loginOrSignup('/login', username, password)
+  }
+
+  static loginOrSignup(url, username, password) {
 
     const userInfo = {
       user: {
@@ -28,8 +39,27 @@ class Auth {
         password,
       }
     }
+    if (username && password) {
+      API.post('/login', userInfo)
+      .then(this.handleResponse.bind(this))
+      .catch(alert)
+    } else {
+      alert('You must provide both a username and password')
+    }
+  }
 
-    API.post('/login', userInfo)
+  static handleResponse(r) {
+    if (r.error) {
+      alert(r.error)
+    } else {
+      this.setCurrentUser(new User(r.current_user))
+      DOM.resetNav()
+      DOM.loadMainContainer()
+    }
+  }
+  
+  static get isSignedIn() {
+    return !!this.currentUser.username
   }
 
   static renderLoginForm() {
