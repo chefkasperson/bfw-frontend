@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px darkslategray;
+  border-radius: 3px;
+  border-style: solid;
+  border-color: goldenrod;
+  border-width: 1px;
+  padding: 5px;
+  margin: 3px;
+
+}
