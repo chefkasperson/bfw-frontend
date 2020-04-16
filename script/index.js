@@ -36,11 +36,18 @@ function handleMainClick(e) {
     case 'auth-form':
       handleAuthFormClick(e)
       break
+    case 'child-button':
+      handleChildButtonClick(e)
+      break
     default: 
       console.log("clicked on ", e.target)
     }
   }
   
+  function handleChildButtonClick(e) {
+    DOM.renderChild(e.target.id)
+  }
+
   function handleAuthFormClick(e) {
     switch (e.target.id) {
       case 'login-form-submit':

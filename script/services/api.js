@@ -26,4 +26,13 @@ class API {
       ...this.options
     }).then(r => r.json())
   }
+
+  static getChildById(childId) {
+    return fetch(this.baseURL + `/children/${childId}`, {
+      method: "GET",
+      headers: this.headers,
+      ...this.options
+    }).then(r => r.json())
+    
+  }
 }

@@ -3,9 +3,10 @@ class User {
   constructor(attributes) {
     this.id = attributes.id
     this.username = attributes.username
+    this.children = attributes.children
   }
 
-  static renderSignupForm(){
+  static renderSignupForm() {
     return `
     <form class='auth-form' id='signup-form' action="#" method="post">
       <input id='signup-form-username-input' name='username' type="text" autocomplete="username" placeholder='username'>
@@ -14,4 +15,5 @@ class User {
     </form>
     `
   }
+
 }

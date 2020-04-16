@@ -1,5 +1,5 @@
 .container {
-  display: flex;
+  display:  block;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px darkslategray;
@@ -10,4 +10,10 @@
   padding: 5px;
   margin: 3px;
 
+}
+
+.main-divs {
+  display: block;
+  justify-content: center;
+  align-items: center;
 }

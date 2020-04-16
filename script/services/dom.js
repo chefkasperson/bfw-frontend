@@ -5,31 +5,48 @@ class DOM {
   }
 
   static loadLoginForm() {
-    const main = document.querySelector('#main-container')
-    main.innerHTML = Auth.renderLoginForm()
+    const formDiv = document.querySelector('#form-div')
+    formDiv.innerHTML = Auth.renderLoginForm()
   }
 
   static loadSignupForm() {
-    const main = document.querySelector('#main-container')
-    main.innerHTML = User.renderSignupForm()
+    const formDiv = document.querySelector('#form-div')
+    formDiv.innerHTML = User.renderSignupForm()
   }
-
+  
   static loadWelcome() {
-    const main = document.querySelector('#main-container')
-    main.innerHTML = `<h1>Welcome to Baby's First Words</h1>`
+    const content = document.querySelector('#content')
+    content.innerHTML = `<h1>Welcome to Baby's First Words</h1>`
   }
-
+  
   static loadMainContainer() {
     this.resetNav()
     if (Auth.isSignedIn) {
-      this.loadUserDashboard()
+      DOM.loadUserDashboard()
     } else {
       DOM.loadWelcome()
     }
   }
-
+  
   static loadUserDashboard() {
-    const main = document.querySelector('#main-container')
-    main.innerHTML = `<h1> Display some rilly coo stuff </h1>`
+    DOM.resetDOM()
+    const content = document.querySelector('#content')
+    content.innerHTML = `<h4> Your Children </h4>`
+    Child.renderUserChildren()
   }
+  
+  static resetDOM() {
+    const formDiv = document.querySelector('#form-div')
+    const content = document.querySelector('#content')
+    const listDiv = document.querySelector('#list-div')
+    formDiv.innerHTML = ""
+    content.innerHTML = ""
+    listDiv.innerHTML = ""
+  }
+
+  static renderChild(id) {
+    API.getChildById(id)
+      .then(console.log)
+  }
+
 }
