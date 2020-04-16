@@ -1,20 +1,20 @@
 class Auth {
   static currentUser = {}
 
-  static setCurrentUser() {
+  static setCurrentUser(user) {
     this.currentUser = user
-    console.log('current user is ', user)
   }
 
   static getCurrentUser() {
+    console.log(API.get("/get_current_user"))
     API.get("/get_current_user")
-      .then(resp => {
-        if (Response.logged_in) {
-          this.setCurrentUser(resp.current_user)
+      .then(response => {
+        if (response.logged_in) {
+          this.setCurrentUser(response.current_user)
           DOM.resetNav()
           DOM.loadMainContainer()
         } else {
-          alert(resp.message)
+          console.log(response.message)
         }
       })
   }
@@ -28,7 +28,14 @@ class Auth {
   static handleSignup() {
     const username = document.querySelector('#signup-form-username-input').value
     const password = document.querySelector('#signup-form-password-input').value
-    this.loginOrSignup('/login', username, password)
+    this.loginOrSignup('/users', username, password)
+  }
+
+  static handleLogout() {
+    this.setCurrentUser({})
+    API.post("/logout")
+    .then(console.log)
+    .finally(() => DOM.loadMainContainer())
   }
 
   static loginOrSignup(url, username, password) {
@@ -40,9 +47,9 @@ class Auth {
       }
     }
     if (username && password) {
-      API.post('/login', userInfo)
+      API.post(url, userInfo)
       .then(this.handleResponse.bind(this))
-      .catch(alert)
+      // .catch(alert)
     } else {
       alert('You must provide both a username and password')
     }
@@ -52,6 +59,7 @@ class Auth {
     if (r.error) {
       alert(r.error)
     } else {
+      console.log(r.current_user)
       this.setCurrentUser(new User(r.current_user))
       DOM.resetNav()
       DOM.loadMainContainer()
