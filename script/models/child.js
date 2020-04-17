@@ -14,7 +14,6 @@ class Child {
   }
 
   static getChildren() {
-    console.log(Auth.currentUser)
     Auth.currentUser.children.forEach(child => Child.renderChild(child))
   }
 
@@ -102,7 +101,6 @@ class Child {
   }
 
   static renderWord(word) {
-    console.log(word)
     const listDiv = document.querySelector('#list-div')
     let h4 = document.createElement('h4')
     h4.innerText = word.word_string
@@ -152,13 +150,12 @@ class Child {
     const wordInfo = {
       word: {
         word,
-        baby_says: babySays,
+        baby_says,
         notes,
-        child_id: childId,
+        child_id,
       }
     }
     if (word) {
-      console.log('i am even here')
       API.post('/new_word', wordInfo)
       .then(this.handleWordResponse.bind(this))
       // .catch(alert)
@@ -168,6 +165,6 @@ class Child {
   }
 
   static handleWordResponse(r) {
-    console.log(r)
+    this.renderWord(r.word)
   }
 }

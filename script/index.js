@@ -26,7 +26,6 @@ function handleNavClick(e) {
       DOM.loadSignupForm()
       break
     default:
-      console.log("clicked on ", e.target)
   }
 }
 
@@ -53,8 +52,9 @@ function handleMainClick(e) {
     case 'new-child-form':
       e.preventDefault()
       Child.handleNewForm()
+      break
     default: 
-      console.log("clicked on ", e.target)
+  
     }
   }
 
@@ -68,7 +68,7 @@ function handleMainClick(e) {
         break
       
       default: 
-        console.log("clicked on ", e.target)
+    
 
   }
 }

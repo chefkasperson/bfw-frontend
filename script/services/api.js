@@ -11,7 +11,6 @@ class API {
   static baseURL = 'http://localhost:3000/api/v1'
 
   static post(url, body) {
-    console.log(url)
     return fetch(this.baseURL + url, {
       method: 'POST',
       headers: this.headers,

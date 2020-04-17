@@ -7,7 +7,6 @@ class Auth {
 
   static getCurrentUser() {
     DOM.resetDOM()
-    console.log(API.get("/get_current_user"))
     API.get("/get_current_user")
       .then(response => {
         if (response.logged_in) {
