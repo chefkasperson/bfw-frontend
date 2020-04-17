@@ -14,7 +14,6 @@ class Child {
   }
 
   static renderChild(child) {
-    console.log(child)
     const listDiv = document.querySelector('#list-div')
     let h3 = document.createElement('h3')
     h3.innerText = child.name
@@ -73,6 +72,26 @@ class Child {
   
   static sendNewChildInfo(url, name, birthday, userId, gender) {
     console.log(url, name, birthday, userId, gender)
+    const childInfo = {
+      child: {
+        name,
+        birthday,
+        gender,
+        user_id: userId,
+      }
+    }
+    if (name && birthday && gender) {
+      console.log('sending child to database')
+      API.post(url, childInfo)
+      .then(this.handleChildResponse.bind(this))
+      // .catch(alert)
+    } else {
+      alert('You must provide all the info')
+    }
+  }
+  
+  static handleChildResponse(r) {
+    Child.renderChild(r.child)
   }
 
 }

@@ -51,14 +51,14 @@ class Auth {
     if (username && password) {
       console.log('i am even here')
       API.post(url, userInfo)
-      .then(this.handleResponse.bind(this))
+      .then(this.handleUserResponse.bind(this))
       // .catch(alert)
     } else {
       alert('You must provide both a username and password')
     }
   }
 
-  static handleResponse(r) {
+  static handleUserResponse(r) {
     if (r.error) {
       alert(r.error)
     } else {
