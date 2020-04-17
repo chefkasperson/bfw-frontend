@@ -31,15 +31,18 @@ function handleNavClick(e) {
 }
 
 function handleMainClick(e) {
-  event.preventDefault()
   switch (e.target.className) {
     case 'auth-form':
+      e.preventDefault()
       console.log('clicked on', e.target)
       handleAuthFormClick(e)
       break
     case 'child-button':
       handleChildButtonClick(e)
       break
+    case 'new-child-form':
+      e.preventDefault()
+      Child.handleNewForm()
     default: 
       console.log("clicked on ", e.target)
     }

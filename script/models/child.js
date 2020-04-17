@@ -38,5 +38,41 @@ class Child {
   static renderUserChildren() {
     Child.getChildren()
   }
+
+  static renderWordForm(child) {
+    return `<h3> HI THERE ${child.name}</h3>`
+  }
+
+  static renderNewChildForm() {
+    return `
+      <h4>Add a child</h4>
+      <form class='new-child-form' id='child-form' action="#" method="post">
+        <label for='name'>name:</label>
+        <input id='child-form-name-input' name='name' type="text" required><br>
+        <label for='birthday'>birthday:</label>
+        <input id='child-form-birthday-input' name='birthday' type="date" required><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input id='child-form-user-id' name='user_id' type="hidden" value=${Auth.currentUser.id}>
+        <input class='new-child-form' id="child-form-submit" type='submit' value='Create Child' >
+      </form>
+    `
+  }
+  static handleNewForm() {
+    const name = document.querySelector('#child-form-name-input').value
+    const birthday = document.querySelector('#child-form-birthday-input').value
+    const male = document.querySelector('#male')
+    const female = document.querySelector('#female')
+    const userId = document.querySelector('#child-form-user-id').value
+    console.log(male.checked, female.checked)
+    const gender = (male.checked ? male.value : female.value)
+    Child.sendNewChildInfo('/children', name, birthday, userId, gender)
+  }
   
+  static sendNewChildInfo(url, name, birthday, userId, gender) {
+    console.log(url, name, birthday, userId, gender)
+  }
+
 }

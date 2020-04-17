@@ -32,8 +32,10 @@ class DOM {
   static loadUserDashboard() {
     DOM.resetDOM()
     const content = document.querySelector('#content')
+    const formDiv = document.querySelector('#form-div')
     content.innerHTML = `<h4> Your Children </h4>`
     Child.renderUserChildren()
+    formDiv.innerHTML = Child.renderNewChildForm()
   }
   
   static resetDOM() {
@@ -44,9 +46,26 @@ class DOM {
     content.innerHTML = ""
     listDiv.innerHTML = ""
   }
-
+  
   static renderChild(child) {
+    const content = document.querySelector('#content')
+    DOM.resetDOM()
+    content.innerHTML = `
+    <h3>${child.name}<h3>
+    <h5>Words Learned</h5>`
+    
+    DOM.renderNewWordForm(child)
+    DOM.renderChildWords(child)
     console.log(child)
   }
-
+  
+  static renderChildWords(child) {
+    const listDiv = document.querySelector('#list-div')
+    listDiv.innerHTML = `lotsa coo words`
+  }
+  
+  static renderNewWordForm(child) {
+    const formDiv = document.querySelector('#form-div')
+    formDiv.innerHTML = Child.renderWordForm(child)
+  }
 }
