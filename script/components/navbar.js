@@ -17,9 +17,13 @@ class Navbar {
     return `<a class='nav-link' href='#' id='logout-link'> Log Out </a>`
   }
 
+  static get homeLink() {
+    return `<a class='nav-link' href='#' id='home-link'> Home </a>`
+  }
+
   static render() {
     return Auth.isSignedIn
-    ? `${this.logoutLink}   ${this.welcomeMessage}`
-    : `${this.loginLink}   or   ${this.signupLink}`
+    ? `${this.logoutLink} ${this.homeLink} ${this.welcomeMessage}`
+    : `${this.loginLink}  ${this.signupLink}`
   }
 }

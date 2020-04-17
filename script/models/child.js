@@ -109,14 +109,14 @@ class Child {
     let p2 = document.createElement('p')
     p2.innerText = 'baby says: ' + word.baby_says + ' --learned at ' + word.age_learned + ' months -- notes: ' + word.notes 
 
-    let btn = document.createElement('button')
-    btn.setAttribute('class', 'word-button')
-    btn.setAttribute('id', `${word.id}`)
-    btn.innerText = 'edit'
+    // let btn = document.createElement('button')
+    // btn.setAttribute('class', 'word-button')
+    // btn.setAttribute('id', `${word.id}`)
+    // btn.innerText = 'edit'
     let divCard = document.createElement('div')
     divCard.setAttribute('class', 'word-div')
     divCard.setAttribute('id', `word-div-${word.id}`)
-    divCard.append(h4, p2, btn)
+    divCard.append(h4, p2/*, btn*/)
     listDiv.append(divCard)
   }
 

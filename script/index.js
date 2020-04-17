@@ -25,6 +25,9 @@ function handleNavClick(e) {
     case 'signup-link':
       DOM.loadSignupForm()
       break
+    case 'home-link':
+      DOM.loadMainContainer()
+      break
     default:
   }
 }
