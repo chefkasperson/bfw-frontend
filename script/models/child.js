@@ -5,6 +5,7 @@ class Child {
     this.gender = attributes.gender
     this.birthday = attributes.birthday
     this.childWords = attributes.child_words
+    this.wordString = attributes.word_string
   }
 
   static getChildren() {
@@ -27,6 +28,11 @@ class Child {
     divCard.setAttribute('id', `child-div-${child.id}`)
     divCard.append(h3, btn)
     listDiv.append(divCard)
+  }
+
+  static getChildById(id) {
+    let child = Auth.currentUser.children.find(c => (c.id == id))
+    DOM.renderChild(child)
   }
   
   static renderUserChildren() {

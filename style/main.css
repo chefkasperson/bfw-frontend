@@ -1,5 +1,6 @@
 .container {
-  display:  block;
+  display:  flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px darkslategray;
@@ -13,7 +14,8 @@
 }
 
 .main-divs {
-  display: block;
+  display:  flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

@@ -34,6 +34,7 @@ function handleMainClick(e) {
   event.preventDefault()
   switch (e.target.className) {
     case 'auth-form':
+      console.log('clicked on', e.target)
       handleAuthFormClick(e)
       break
     case 'child-button':
@@ -45,7 +46,7 @@ function handleMainClick(e) {
   }
   
   function handleChildButtonClick(e) {
-    DOM.renderChild(e.target.id)
+    Child.getChildById(e.target.id)
   }
 
   function handleAuthFormClick(e) {

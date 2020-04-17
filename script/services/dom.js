@@ -21,6 +21,7 @@ class DOM {
   
   static loadMainContainer() {
     this.resetNav()
+    this.resetDOM()
     if (Auth.isSignedIn) {
       DOM.loadUserDashboard()
     } else {
@@ -44,9 +45,8 @@ class DOM {
     listDiv.innerHTML = ""
   }
 
-  static renderChild(id) {
-    API.getChildById(id)
-      .then(console.log)
+  static renderChild(child) {
+    console.log(child)
   }
 
 }
