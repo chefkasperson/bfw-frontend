@@ -37,6 +37,16 @@ function handleMainClick(e) {
       console.log('clicked on', e.target)
       handleAuthFormClick(e)
       break
+    case 'add-child-form':
+      DOM.loadChildForm()
+      break
+    case 'add-word-form':
+      DOM.loadWordForm()
+      break
+    case 'new-word-form':
+      e.preventDefault()
+      Child.handleNewWord()
+      break
     case 'child-button':
       Child.getChildById(e.target.id)
       break

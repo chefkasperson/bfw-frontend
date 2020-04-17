@@ -7,6 +7,11 @@ class Child {
   //   this.childWords = attributes.child_words
   //   this.wordString = attributes.word_string
   // }
+  static currentChild = {}
+
+  static setCurrentChild(child) {
+    this.currentChild = child
+  }
 
   static getChildren() {
     console.log(Auth.currentUser)
@@ -31,6 +36,7 @@ class Child {
 
   static getChildById(id) {
     let child = Auth.currentUser.children.find(c => (c.id == id))
+    this.setCurrentChild(child)
     DOM.renderChild(child)
   }
   
@@ -116,7 +122,8 @@ class Child {
     listDiv.append(divCard)
   }
 
-  static renderWordForm(child) {
+  static renderWordForm() {
+    let child = this.currentChild
     return `
     <form class='new-word-form' id='word-form' action="#" method="post">
       <label for='word'>Word:</label>
@@ -124,10 +131,43 @@ class Child {
       <label for='baby_says'>Baby says:</label>
       <input id='word-form-baby_says-input' name='baby_says' type="text"><br>
       <label for="notes">Notes: </label>
-      <input id='word-form-baby_says-input' name='notes' type="text"><br>
+      <input id='word-form-notes-input' name='notes' type="text"><br>
       <input id='word-form-child-id' name='child_id' type="hidden" value=${child.id}><br>
       <input class='new-word-form' id="word-form-submit" type='submit' value='Create Word' >
     </form>
     `
+  }
+
+  static handleNewWord() {
+    const word = document.querySelector('#word-form-string-input').value
+    const babySays = document.querySelector('#word-form-baby_says-input').value
+    const notes = document.querySelector('#word-form-notes-input').value
+    const childId = document.querySelector('#word-form-child-id').value
+    
+    this.sendWordToDB(word, babySays, notes, childId)
+  }
+
+  static sendWordToDB(word, baby_says, notes, child_id) {
+
+    const wordInfo = {
+      word: {
+        word,
+        baby_says: babySays,
+        notes,
+        child_id: childId,
+      }
+    }
+    if (word) {
+      console.log('i am even here')
+      API.post('/new_word', wordInfo)
+      .then(this.handleWordResponse.bind(this))
+      // .catch(alert)
+    } else {
+      alert('You must provide both a word')
+    }
+  }
+
+  static handleWordResponse(r) {
+    console.log(r)
   }
 }
