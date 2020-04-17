@@ -52,20 +52,10 @@ class DOM {
     DOM.resetDOM()
     content.innerHTML = `
     <h3>${child.name}<h3>
-    <h5>Words Learned</h5>`
+    <h5>${child.child_words.length} Words Learned</h5>`
     
-    DOM.renderNewWordForm(child)
-    DOM.renderChildWords(child)
-    console.log(child)
+    Child.listChildWords(child)
+    Child.renderWordForm(child)
   }
   
-  static renderChildWords(child) {
-    const listDiv = document.querySelector('#list-div')
-    listDiv.innerHTML = `lotsa coo words`
-  }
-  
-  static renderNewWordForm(child) {
-    const formDiv = document.querySelector('#form-div')
-    formDiv.innerHTML = Child.renderWordForm(child)
-  }
 }

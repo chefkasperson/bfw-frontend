@@ -1,12 +1,12 @@
 class Child {
-  constructor(attributes) {
-    this.id = attributes.id
-    this.name = attributes.name
-    this.gender = attributes.gender
-    this.birthday = attributes.birthday
-    this.childWords = attributes.child_words
-    this.wordString = attributes.word_string
-  }
+  // constructor(attributes) {
+  //   this.id = attributes.id
+  //   this.name = attributes.name
+  //   this.gender = attributes.gender
+  //   this.birthday = attributes.birthday
+  //   this.childWords = attributes.child_words
+  //   this.wordString = attributes.word_string
+  // }
 
   static getChildren() {
     console.log(Auth.currentUser)
@@ -37,16 +37,12 @@ class Child {
   static renderUserChildren() {
     Child.getChildren()
   }
-
-  static renderWordForm(child) {
-    return `<h3> HI THERE ${child.name}</h3>`
-  }
-
+  
   static renderNewChildForm() {
     return `
       <h4>Add a child</h4>
       <form class='new-child-form' id='child-form' action="#" method="post">
-        <label for='name'>name:</label>
+      <label for='name'>name:</label>
         <input id='child-form-name-input' name='name' type="text" required><br>
         <label for='birthday'>birthday:</label>
         <input id='child-form-birthday-input' name='birthday' type="date" required><br>
@@ -56,8 +52,8 @@ class Child {
         <label for="female">Female</label><br>
         <input id='child-form-user-id' name='user_id' type="hidden" value=${Auth.currentUser.id}>
         <input class='new-child-form' id="child-form-submit" type='submit' value='Create Child' >
-      </form>
-    `
+        </form>
+        `
   }
   static handleNewForm() {
     const name = document.querySelector('#child-form-name-input').value
@@ -93,5 +89,45 @@ class Child {
   static handleChildResponse(r) {
     Child.renderChild(r.child)
   }
+  
+  static listChildWords(child) {
+    let words = child.child_words
+    words.forEach(w => Child.renderWord(w))
+  }
 
+  static renderWord(word) {
+    console.log(word)
+    const listDiv = document.querySelector('#list-div')
+    let h4 = document.createElement('h4')
+    h4.innerText = word.word_string
+    
+    
+    let p2 = document.createElement('p')
+    p2.innerText = 'baby says: ' + word.baby_says + ' --learned at ' + word.age_learned + ' months -- notes: ' + word.notes 
+
+    let btn = document.createElement('button')
+    btn.setAttribute('class', 'word-button')
+    btn.setAttribute('id', `${word.id}`)
+    btn.innerText = 'edit'
+    let divCard = document.createElement('div')
+    divCard.setAttribute('class', 'word-div')
+    divCard.setAttribute('id', `word-div-${word.id}`)
+    divCard.append(h4, p2, btn)
+    listDiv.append(divCard)
+  }
+
+  static renderWordForm(child) {
+    return `
+    <form class='new-word-form' id='word-form' action="#" method="post">
+      <label for='word'>Word:</label>
+      <input id='word-form-string-input' name='word' type="text" required><br>
+      <label for='baby_says'>Baby says:</label>
+      <input id='word-form-baby_says-input' name='baby_says' type="text"><br>
+      <label for="notes">Notes: </label>
+      <input id='word-form-baby_says-input' name='notes' type="text"><br>
+      <input id='word-form-child-id' name='child_id' type="hidden" value=${child.id}><br>
+      <input class='new-word-form' id="word-form-submit" type='submit' value='Create Word' >
+    </form>
+    `
+  }
 }

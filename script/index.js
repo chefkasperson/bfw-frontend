@@ -38,7 +38,7 @@ function handleMainClick(e) {
       handleAuthFormClick(e)
       break
     case 'child-button':
-      handleChildButtonClick(e)
+      Child.getChildById(e.target.id)
       break
     case 'new-child-form':
       e.preventDefault()
@@ -46,10 +46,6 @@ function handleMainClick(e) {
     default: 
       console.log("clicked on ", e.target)
     }
-  }
-  
-  function handleChildButtonClick(e) {
-    Child.getChildById(e.target.id)
   }
 
   function handleAuthFormClick(e) {
