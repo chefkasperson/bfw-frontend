@@ -34,7 +34,10 @@ class Child {
   }
 
   static getChildById(id) {
+    console.log(id)
+    console.log('a')
     let child = Auth.currentUser.children.find(c => (c.id == id))
+    console.log(child)
     this.setCurrentChild(child)
     DOM.renderChild(child)
   }
@@ -92,6 +95,7 @@ class Child {
   }
   
   static handleChildResponse(r) {
+    Auth.currentUser.children.push(r.child)
     Child.renderChild(r.child)
   }
   

@@ -6,6 +6,7 @@ class User {
     this.children = attributes.children
   }
 
+
   static renderSignupForm() {
     return `
     <form class='auth-form' id='signup-form' action="#" method="post">
