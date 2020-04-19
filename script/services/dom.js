@@ -53,13 +53,10 @@ class DOM {
   }
 
   static renderChild(child) {
-    const content = document.querySelector('#content')
     const formDiv = document.querySelector('#form-div')
     DOM.resetDOM()
-    content.innerHTML = `
-    <h3>${child.name}<h3>
-    <h5>${child.child_words.length} Words Learned</h5>`
     
+    Child.renderChildHeader(child) 
     Child.listChildWords(child)
     formDiv.innerHTML = `<button class='add-word-form' id='word-form-button'>Add a new word</button>`
   }

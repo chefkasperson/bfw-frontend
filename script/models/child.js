@@ -95,6 +95,13 @@ class Child {
     Child.renderChild(r.child)
   }
   
+  static renderChildHeader(child) {
+    const content = document.querySelector('#content')
+    content.innerHTML = `
+      <h3>${child.name}<h3>
+      <h5>${child.child_words.length} Words Learned</h5>
+    `
+  }
   static listChildWords(child) {
     let words = child.child_words
     words.forEach(w => Child.renderWord(w))
@@ -142,11 +149,12 @@ class Child {
     const notes = document.querySelector('#word-form-notes-input').value
     const childId = document.querySelector('#word-form-child-id').value
     DOM.loadWordForm()
+    
     this.sendWordToDB(word, babySays, notes, childId)
   }
-
+  
   static sendWordToDB(word, baby_says, notes, child_id) {
-
+    
     const wordInfo = {
       word: {
         word,
@@ -163,8 +171,12 @@ class Child {
       alert('You must provide both a word')
     }
   }
-
+  
   static handleWordResponse(r) {
+    let child = this.currentChild
+    console.log(child)
+    child.child_words.push(r.word)
+    this.renderChildHeader(child)
     this.renderWord(r.word)
   }
 }
