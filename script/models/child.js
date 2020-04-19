@@ -67,6 +67,7 @@ class Child {
     const female = document.querySelector('#female')
     const userId = document.querySelector('#child-form-user-id').value
     const gender = (male.checked ? male.value : female.value)
+    DOM.loadChildForm()
     Child.sendNewChildInfo('/children', name, birthday, userId, gender)
   }
   
@@ -140,7 +141,7 @@ class Child {
     const babySays = document.querySelector('#word-form-baby_says-input').value
     const notes = document.querySelector('#word-form-notes-input').value
     const childId = document.querySelector('#word-form-child-id').value
-    
+    DOM.loadWordForm()
     this.sendWordToDB(word, babySays, notes, childId)
   }
 
