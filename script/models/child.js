@@ -34,10 +34,7 @@ class Child {
   }
 
   static getChildById(id) {
-    console.log(id)
-    console.log('a')
     let child = Auth.currentUser.children.find(c => (c.id == id))
-    console.log(child)
     this.setCurrentChild(child)
     DOM.renderChild(child)
   }
@@ -69,13 +66,11 @@ class Child {
     const male = document.querySelector('#male')
     const female = document.querySelector('#female')
     const userId = document.querySelector('#child-form-user-id').value
-    console.log(male.checked, female.checked)
     const gender = (male.checked ? male.value : female.value)
     Child.sendNewChildInfo('/children', name, birthday, userId, gender)
   }
   
   static sendNewChildInfo(url, name, birthday, userId, gender) {
-    console.log(url, name, birthday, userId, gender)
     const childInfo = {
       child: {
         name,
