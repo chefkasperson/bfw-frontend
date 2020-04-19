@@ -174,7 +174,6 @@ class Child {
   
   static handleWordResponse(r) {
     let child = this.currentChild
-    console.log(child)
     child.child_words.push(r.word)
     this.renderChildHeader(child)
     this.renderWord(r.word)
