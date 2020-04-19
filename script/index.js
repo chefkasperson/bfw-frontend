@@ -36,7 +36,6 @@ function handleMainClick(e) {
   switch (e.target.className) {
     case 'auth-form':
       e.preventDefault()
-      console.log('clicked on', e.target)
       handleAuthFormClick(e)
       break
     case 'add-child-form':
