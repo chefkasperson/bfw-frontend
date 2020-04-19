@@ -22,7 +22,6 @@ class Auth {
   static handleLogin() {
     const username = document.querySelector('#login-form-username-input').value
     const password = document.querySelector('#login-form-password-input').value
-    console.log('i am still here')
     this.loginOrSignup('/login', username, password)
   }
 
@@ -35,7 +34,6 @@ class Auth {
   static handleLogout() {
     this.setCurrentUser({})
     API.post("/logout")
-    .then(console.log)
     .finally(() => DOM.loadMainContainer())
   }
 
@@ -48,7 +46,6 @@ class Auth {
       }
     }
     if (username && password) {
-      console.log('i am even here')
       API.post(url, userInfo)
       .then(this.handleUserResponse.bind(this))
       // .catch(alert)
@@ -61,7 +58,6 @@ class Auth {
     if (r.error) {
       alert(r.error)
     } else {
-      console.log(r.current_user)
       this.setCurrentUser(new User(r.current_user))
       DOM.resetNav()
       DOM.loadMainContainer()
